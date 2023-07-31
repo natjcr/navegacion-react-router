@@ -32,7 +32,7 @@ export function BlogPost() {
     if (!postDeleted) {
         return (
             <>
-                <button onClick={returnToBlog}>return to blog</button>
+                <button onClick={returnToBlog}>Regresa al Blog</button>
                 <h2>{blogPost.title}</h2>
                 <li>{blogPost.author}</li>
                 <p>{blogPost.content}</p>
