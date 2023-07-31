@@ -1,5 +1,6 @@
 import React from "react";
 import { useAuth } from "./auth";
+import { Navigate } from "react-router-dom";
 
 function LoginPage() {
     const auth = useAuth();
@@ -9,6 +10,11 @@ function LoginPage() {
         e.preventDefault();
         auth.login({ username })
     }
+
+    if (auth.user) {
+        <Navigate to='/profile' />
+    }
+
 
     return(
         <>
