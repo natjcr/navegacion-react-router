@@ -1,40 +1,53 @@
-import React from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { blogdata } from "./blogdata.js"
-import { useAuth } from "./auth.js";
+import React, { useEffect } from 'react'
+import { useNavigate, useOutletContext, useParams } from 'react-router-dom'
+import { blogdata } from './blogdata.js'
+import { useAuth } from './auth'
 
-function BlogPost() {
-    const navigate = useNavigate();
-    const { slug } = useParams();
+export function BlogPost() {
+    const { postDeleted, setPostDeleted } = useOutletContext()
+    const navigate = useNavigate()
+    const { slug } = useParams()
+    const { user } = useAuth()
+    const blogPost = blogdata.find(post => post.slug === slug)
 
-    const auth = useAuth();
-
-    const blogpost = blogdata.find(post => post.slug === slug)
-
-    const canDelete = auth.user?.isAdmin || blogpost.author === auth.user?.username;
+    const userIsAuthor = user?.username === blogPost.author
+    const userIsEditor = user?.isEditor
+    const userIsSpellChecker = user?.isSpellChecker
+    const userIsModerator = user?.isModerator
 
     const returnToBlog = () => {
         navigate('/blog')
     }
 
-    const deleteBlog = () => {
-        navigate ('delete')
+    // ACTION CREATORS
+    const onDelete = () => {
+        setPostDeleted(true)
+        blogPost.deleted = true
     }
 
-    return(
-       <>
-        <h2>{blogpost.title}</h2>
-        <button onClick={returnToBlog}>Volver al Blog</button>
-        <p>{blogpost.author}</p>
-        <p>{blogpost.content}</p>
+    useEffect(() => {
+        setPostDeleted(blogPost.deleted)
+    }, [blogPost, setPostDeleted])
 
-        {canDelete && (
-            <button onClick={deleteBlog}>Eliminar BlogPost</button>
-        )}
-       </> 
-       
-    )
+    if (!postDeleted) {
+        return (
+            <>
+                <button onClick={returnToBlog}>return to blog</button>
+                <h2>{blogPost.title}</h2>
+                <li>{blogPost.author}</li>
+                <p>{blogPost.content}</p>
+
+                {userIsModerator && <button>mark as best</button>}
+                {(userIsModerator || userIsAuthor) && (
+                    <button onClick={onDelete}>delete blog</button>
+                )}
+                {(userIsEditor || userIsAuthor) && <button>Modify blog</button>}
+                {(userIsSpellChecker || userIsAuthor) && (
+                    <button>Correct spelling</button>
+                )}
+            </>
+        )
+    } else {
+        return <p>{blogPost.title} has been deleted</p>
+    }
 }
-
-
-export { BlogPost }

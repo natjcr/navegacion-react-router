@@ -1,4 +1,5 @@
 const blogdata = [];
+
 blogdata.push({
     title: '¿Qué es React?',
     slug: 'que-es-react',
@@ -17,5 +18,7 @@ blogdata.push({
     content: 'Angular es el mejor framework de JS',
     author: 'njcr'
 })
+
+
 
 export { blogdata }

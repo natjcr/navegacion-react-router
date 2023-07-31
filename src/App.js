@@ -8,6 +8,7 @@ import { LogoutPage } from "./LogoutPage";
 import { LoginPage } from "./LoginPage";
 import { AuthProvider, AuthRoute } from "./auth";
 
+
 function App() {
   return (
     <>

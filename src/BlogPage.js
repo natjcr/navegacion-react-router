@@ -1,32 +1,29 @@
-import React from "react";
-import { Link, Outlet } from "react-router-dom";
-import { blogdata } from "./blogdata.js";
+import React, { useState } from 'react'
+import { NavLink, Outlet } from 'react-router-dom'
+import { blogdata } from './blogdata.js'
 
-function BlogPage() {
-    return(
-       <>
-            <h1>Blog</h1>
+export function BlogPage() {
+    const [postDeleted, setPostDeleted] = useState(false)
 
-            <Outlet />
+    return (
+        <>
+            <h1>BlogPage</h1>
 
-           <ul>
-             {blogdata.map(post => (
-                <BlogLink key={post.slug} post={post} />
-            ))}
-           </ul>
-       </> 
-       
+            <Outlet context={{ postDeleted, setPostDeleted }} />
+            <ul>
+                {blogdata.map(post => {
+                    if (post.deleted) return null
+                    return <BlogLink key={post.slug} post={post}></BlogLink>
+                })}
+            </ul>
+        </>
     )
 }
 
 function BlogLink({ post }) {
     return (
         <li>
-            <Link to={`/blog/${post.slug}`}>{post.title}</Link>
+            <NavLink to={`/blog/${post.slug}`}>{post.title}</NavLink>
         </li>
     )
 }
-
-
-
-export { BlogPage }
