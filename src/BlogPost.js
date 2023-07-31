@@ -37,13 +37,13 @@ export function BlogPost() {
                 <li>{blogPost.author}</li>
                 <p>{blogPost.content}</p>
 
-                {userIsModerator && <button>mark as best</button>}
+                {userIsModerator && <button>Marca tu favorito</button>}
                 {(userIsModerator || userIsAuthor) && (
-                    <button onClick={onDelete}>delete blog</button>
+                    <button onClick={onDelete}>Eliminar Blog</button>
                 )}
-                {(userIsEditor || userIsAuthor) && <button>Modify blog</button>}
+                {(userIsEditor || userIsAuthor) && <button>Modificar Blog</button>}
                 {(userIsSpellChecker || userIsAuthor) && (
-                    <button>Correct spelling</button>
+                    <button>Corregir Contenido</button>
                 )}
             </>
         )
