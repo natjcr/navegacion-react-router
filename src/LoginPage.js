@@ -12,7 +12,7 @@ function LoginPage() {
     }
 
     if (auth.user) {
-        <Navigate to='/profile' />
+        return <Navigate to='/profile' />
     }
 
 

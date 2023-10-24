@@ -16,7 +16,7 @@ export function BlogPost() {
     const userIsModerator = user?.isModerator
 
     const returnToBlog = () => {
-        navigate('/blog')
+        navigate('/blog');
     }
 
     // ACTION CREATORS

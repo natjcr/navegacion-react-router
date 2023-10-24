@@ -4,13 +4,13 @@ blogdata.push({
     title: '¿Qué es React?',
     slug: 'que-es-react',
     content: 'React es el mejor framework de JS',
-    author: 'njcr',
+    author: 'V',
 })
 blogdata.push({
     title: '¿Qué es Vue?',
     slug: 'que-es-Vue',
     content: 'Vue es el mejor framework de JS',
-    author: 'njcr'
+    author: 'JIMIN'
 })
 blogdata.push({
     title: '¿Qué es Angular?',

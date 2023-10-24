@@ -10,12 +10,12 @@ export function BlogPage() {
             <h1>BlogPage</h1>
 
             <Outlet context={{ postDeleted, setPostDeleted }} />
-            <ul>
-                {blogdata.map(post => {
-                    if (post.deleted) return null
-                    return <BlogLink key={post.slug} post={post}></BlogLink>
-                })}
-            </ul>
+                <ul>
+                    {blogdata.map(post => {
+                        if (post.deleted) return null
+                        return <BlogLink key={post.slug} post={post}></BlogLink>
+                    })}
+                </ul>
         </>
     )
 }
@@ -27,3 +27,4 @@ function BlogLink({ post }) {
         </li>
     )
 }
+
